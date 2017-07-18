@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class HomeView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'home.html'
 
 
 class UserCreateView(CreateView):
