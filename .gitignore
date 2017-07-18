@@ -1,2 +1,6 @@
 settings.py
+*.pyc
+.idea
+
+
 

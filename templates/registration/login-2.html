@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6 thumbnail">
+    <h3 style="color:black; margin-top:10px;">사용자 로그인</h3>
+      <form action="." method="post">{% csrf_token %}
+        {% if form.errors %}
+            <p><span class="label label-danger">사용자 이름 및 비밀번호를 확인해 주세요. </span></p>
+        {% endif %}
+        <table class="primary table">
+            <tr>
+                <td style="color:black;">
+                    {{ form.username.label_tag }}
+                </td>
+                <td style="color:black;">
+                    {{ form.username }}
+                </td>
+            </tr>
+            <tr>
+                <td style="color:black;">
+                    {{ form.password.label_tag }}
+                </td>
+                <td style="color:black;">
+                    {{ form.password }}
+                </td>
+            </tr>
+        </table>
+
+        <div class="row">
+            <div class="col-md-6" style="margin-top: 10px;">
+              <a href="{% url 'register' %}"><span class="label label-danger">회원가입 페이지로 이동</span></a>
+            </div>
+            <div class="col-md-offset-2 col-md-2" style="margin-bottom:10px;">
+              <button class="btn btn-primary" type="submit" name="action">로그인</button>
+              <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+          </div>
+      </form>
+  </div>
+</div>
+
+
+{% endblock content %}
