@@ -84,10 +84,9 @@ desired effect
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="{% static '/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
+              <i class="fa fa-cog" aria-hidden="true"></i>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">관리</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -95,8 +94,14 @@ desired effect
                 <img src="{% static '/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Admin
-                  <small>Member since July. 2017</small>
+                  {% if user.is_superuser %}
+                    관리자
+                  {% elif user.is_staff %}
+                    운영자
+                  {% else %}
+                   {{ user.last_name }}{{ user.first_name }}
+                  {% endif %}
+                  <small>마지막 로그인: {{ user.last_login }}</small>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -105,7 +110,7 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">정보수정</a>
                 </div>
                 <div class="pull-right">
-                  <a href="/" class="btn btn-default btn-flat">로그아웃</a>
+                  <a href="{% url 'logout' %}" class="btn btn-default btn-flat">로그아웃</a>
                 </div>
               </li>
             </ul>
@@ -125,9 +130,13 @@ desired effect
           <img src="{% static '/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{ user.username | title }}</p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> 온라인</a>
+          {% if user.is_active %}
+            <i class="fa fa-circle text-success"></i> 온라인
+          {% else %}
+            <i class="fa fa-circle text-muted"></i> 오프라인
+          {% endif %}
         </div>
       </div>
 
@@ -174,7 +183,6 @@ desired effect
   {% include "footer.html" %}
 
 </div>
-
 
 <!-- REQUIRED JS SCRIPTS -->
 
