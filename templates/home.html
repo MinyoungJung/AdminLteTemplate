@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="inner cover">
+  <h1 class="cover-heading">우리동네 집주인</h1>
+  <p class="lead">우리동네 집주인은 세입자의 권리를 보호하기 위해 </br>집주인의 평판을 검색해 볼 수 있는 서비스입니다.</p>
+
+  <form class="input-group input-group-lg" id="searchform" action="{% url 'reputation:reputation_list' %}" method="get" accept-charset="utf-8">
+    <input class="form-control"  id="searchbox" name="q"  type="text" placeholder="주소로 검색...">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit">검색</button>
+      </span>
+  </form>
+</div>
+
+{% endblock %}
